@@ -25,7 +25,7 @@ func (p *Proc) String() string {
 	return fmt.Sprintf("<Pid:%d, Name:%s, State:%s, Cmdline:%s>", p.Ps.Pid, p.Ps.Name, p.Ps.State, p.Cmdline)
 }
 
-func getPidStatus(fn string) (*PidStatus, error) {
+func GetPidStatus(fn string) (*PidStatus, error) {
 	f, err := ioutil.ReadFile(fn)
 	if err != nil {
 		return nil, err
@@ -75,7 +75,7 @@ func AllProcs() ([]*Proc, error) {
 		if !IsExist(statusFile) || !IsExist(cmdlineFile) {
 			continue
 		}
-		ps, err := getPidStatus(statusFile)
+		ps, err := GetPidStatus(statusFile)
 		if err != nil {
 			continue
 		}
